@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PayPilot | AI Cash Flow Copilot</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #172033;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: white;
+      padding: 28px 8%;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 70px;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    .hero {
+      max-width: 900px;
+      padding-bottom: 80px;
+    }
+
+    .tagline {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.7rem);
+      line-height: 1.05;
+      margin-bottom: 22px;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 720px;
+      color: #dbeafe;
+      margin-bottom: 30px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #1d4ed8;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.12);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    section {
+      padding: 70px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 45px;
+    }
+
+    .section-title h2 {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+
+    .section-title p {
+      color: #526173;
+      font-size: 1.05rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 22px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: white;
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #0f172a;
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      color: #526173;
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+
+    .demo-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      max-width: 1120px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .demo-panel {
+      background: white;
+      padding: 30px;
+      border-radius: 24px;
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+      border: 1px solid #e5e7eb;
+    }
+
+    label {
+      display: block;
+      font-weight: 800;
+      margin: 14px 0 6px;
+      color: #0f172a;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+
+    .result-box {
+      background: #0f172a;
+      color: white;
+      padding: 28px;
+      border-radius: 20px;
+      margin-top: 18px;
+    }
+
+    .score {
+      font-size: 3rem;
+      font-weight: 900;
+      margin: 8px 0;
+    }
+
+    .recommendation {
+      background: #eff6ff;
+      border-left: 5px solid #1d4ed8;
+      padding: 18px;
+      border-radius: 12px;
+      color: #1e3a8a;
+      margin-top: 18px;
+      font-weight: 700;
+    }
+
+    .pricing {
+      background: #ffffff;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #1d4ed8;
+      margin: 12px 0;
+    }
+
+    ul {
+      padding-left: 20px;
+      color: #526173;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      text-align: center;
+      padding: 35px 8%;
+    }
+
+    @media (max-width: 800px) {
+      nav {
+        flex-direction: column;
+        gap: 18px;
+        align-items: flex-start;
+      }
+
+      .nav-links a {
+        margin-left: 0;
+        margin-right: 14px;
+      }
+
+      .demo-wrap {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">PayPilot</div>
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#demo">Demo</a>
+        <a href="#pricing">Pricing</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <span class="tagline">AI-powered financial planning for freelancers and young professionals</span>
+      <h1>Know if you can afford life before you spend.</h1>
+      <p>PayPilot is a FinTech cash flow copilot that predicts upcoming bills, debt pressure, and savings gaps so users can make smarter money decisions before problems happen.</p>
+      <div class="button-row">
+        <a class="btn btn-primary" href="#demo">Try the Demo</a>
+        <a class="btn btn-secondary" href="#solution">See How It Works</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="problem">
+    <div class="section-title">
+      <h2>The Problem</h2>
+      <p>Most budgeting apps only tell people what they already spent. PayPilot focuses on what is coming next.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">1</div>
+        <h3>Income is irregular</h3>
+        <p>Freelancers, college graduates, and commission-based workers often have income that changes month to month.</p>
+      </div>
+      <div class="card">
+        <div class="icon">2</div>
+        <h3>Bills hit at bad times</h3>
+        <p>Rent, loans, insurance, subscriptions, and credit card payments can create cash shortages even when income looks fine.</p>
+      </div>
+      <div class="card">
+        <div class="icon">3</div>
+        <h3>Advice is too generic</h3>
+        <p>Traditional finance tools rarely explain what action to take this week in plain English.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="solution" style="background:#eef4ff;">
+    <div class="section-title">
+      <h2>Our Solution</h2>
+      <p>PayPilot combines cash flow forecasting, debt tracking, and simple AI recommendations into one personal finance dashboard.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">✓</div>
+        <h3>Cash Flow Score</h3>
+        <p>A simple 0–100 score that shows how healthy your upcoming month looks.</p>
+      </div>
+      <div class="card">
+        <div class="icon">$</div>
+        <h3>Smart Bill Timing</h3>
+        <p>The app warns users when a bill may create a cash crunch and suggests better payment timing.</p>
+      </div>
+      <div class="card">
+        <div class="icon">AI</div>
+        <h3>Plain-English Coaching</h3>
+        <p>Instead of confusing charts, PayPilot gives clear recommendations like “save $75 this week” or “delay nonessential spending.”</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <div class="section-title">
+      <h2>Demo App: Cash Flow Health Check</h2>
+      <p>Enter a few numbers below to see how PayPilot could give users an instant financial health score and recommendation.</p>
+    </div>
+
+    <div class="demo-wrap">
+      <div class="demo-panel">
+        <h3>Try PayPilot</h3>
+        <label for="income">Monthly Income</label>
+        <input type="number" id="income" value="3200" />
+
+        <label for="bills">Monthly Bills</label>
+        <input type="number" id="bills" value="2100" />
+
+        <label for="debt">Debt Payments</label>
+        <input type="number" id="debt" value="350" />
+
+        <label for="savings">Current Savings</label>
+        <input type="number" id="savings" value="1200" />
+
+        <label for="risk">Income Stability</label>
+        <select id="risk">
+          <option value="stable">Stable income</option>
+          <option value="medium">Somewhat irregular</option>
+          <option value="high">Very irregular</option>
+        </select>
+
+        <button class="btn btn-primary" style="background:#1d4ed8;color:white;margin-top:20px;" onclick="calculateScore()">Calculate Score</button>
+      </div>
+
+      <div class="demo-panel">
+        <h3>Your PayPilot Result</h3>
+        <div class="result-box">
+          <p>Cash Flow Score</p>
+          <div class="score" id="score">78</div>
+          <p id="status">Healthy, but watch debt and bill timing.</p>
+        </div>
+        <div class="recommendation" id="recommendation">
+          Recommendation: You have room in your monthly cash flow, but PayPilot suggests building savings before increasing discretionary spending.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="pricing">
+    <div class="section-title">
+      <h2>Business Model</h2>
+      <p>PayPilot uses a freemium model designed for students, recent graduates, freelancers, and early-career professionals.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <ul>
+          <li>Basic cash flow score</li>
+          <li>Manual income and bill entry</li>
+          <li>Monthly recommendation</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Pro</h3>
+        <div class="price">$7/mo</div>
+        <ul>
+          <li>AI spending suggestions</li>
+          <li>Debt payoff planning</li>
+          <li>Bill timing alerts</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Partner</h3>
+        <div class="price">B2B</div>
+        <ul>
+          <li>Offered through banks and credit unions</li>
+          <li>Financial wellness dashboard</li>
+          <li>Custom customer insights</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <h2>Why It Is Different</h2>
+      <p>PayPilot is not just another budgeting app. It acts like a financial early-warning system for people whose income and expenses do not always line up perfectly.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 PayPilot. Built as a FinTech startup concept.</p>
+  </footer>
+
+  <script>
+    function calculateScore() {
+      const income = Number(document.getElementById('income').value);
+      const bills = Number(document.getElementById('bills').value);
+      const debt = Number(document.getElementById('debt').value);
+      const savings = Number(document.getElementById('savings').value);
+      const risk = document.getElementById('risk').value;
+
+      if (!income || income <= 0) {
+        document.getElementById('score').textContent = '—';
+        document.getElementById('status').textContent = 'Please enter a valid monthly income.';
+        document.getElementById('recommendation').textContent = 'Recommendation: Start by entering your income, bills, debt payments, and savings.';
+        return;
+      }
+
+      const leftover = income - bills - debt;
+      const leftoverRatio = leftover / income;
+      const savingsMonths = savings / Math.max(bills + debt, 1);
+      let score = 50;
+
+      score += leftoverRatio * 80;
+      score += Math.min(savingsMonths, 3) * 8;
+      score -= (debt / income) * 35;
+
+      if (risk === 'medium') score -= 8;
+      if (risk === 'high') score -= 16;
+
+      score = Math.max(0, Math.min(100, Math.round(score)));
+
+      let status = '';
+      let recommendation = '';
+
+      if (score >= 80) {
+        status = 'Strong financial position.';
+        recommendation = 'Recommendation: Your cash flow looks strong. Consider increasing savings, investing, or paying down debt faster.';
+      } else if (score >= 60) {
+        status = 'Healthy, but needs attention.';
+        recommendation = 'Recommendation: You are in decent shape, but PayPilot suggests limiting nonessential spending and building a larger emergency fund.';
+      } else if (score >= 40) {
+        status = 'Moderate risk of cash shortage.';
+        recommendation = 'Recommendation: PayPilot suggests reviewing bills, delaying unnecessary purchases, and setting aside cash before your next major payment.';
+      } else {
+        status = 'High risk of cash shortage.';
+        recommendation = 'Recommendation: PayPilot suggests cutting flexible spending immediately, contacting lenders if needed, and prioritizing rent, utilities, and minimum debt payments.';
+      }
+
+      document.getElementById('score').textContent = score;
+      document.getElementById('status').textContent = status;
+      document.getElementById('recommendation').textContent = recommendation;
+    }
+
+    calculateScore();
+  </script>
+</body>
+</html>
